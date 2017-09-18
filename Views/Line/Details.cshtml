@@ -1,0 +1,48 @@
+@model BE_Capstone.Models.Line
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Line</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Order)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Order)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Body)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Body)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Character)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Character.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Scene)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Scene.Description)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.LineId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

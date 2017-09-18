@@ -1,0 +1,47 @@
+@model IEnumerable<BE_Capstone.Models.Direction>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Order)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Body)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Scene)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Body)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Scene.Description)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DirectionId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DirectionId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DirectionId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

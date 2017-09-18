@@ -1,0 +1,62 @@
+@model BE_Capstone.Models.Scene
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Scene</h4>
+    <hr />
+    <input type="hidden" asp-for="SceneId" />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Order)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Order)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Body)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Body)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Project)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Project.Description)
+        </dd>
+    </dl>
+</div>
+Lines:
+@foreach (var orderproduct in Model.Lines)
+{
+    <a asp-controller="Line" asp-action="Details" asp-route-id="@orderproduct.LineId"><p>@orderproduct.Description</p></a>
+}
+Directions:
+@foreach (var orderproduct in Model.Directions)
+{
+    <a asp-controller="Direction" asp-action="Edit" asp-route-id="@orderproduct.DirectionId"><p>@orderproduct.Body</p></a>
+}
+
+<div>
+    <a asp-controller="Line" asp-action="Create" asp-route-id="@Model.SceneId">Add a Line</a> |
+    <a asp-controller="Direction" asp-action="Create" asp-route-id="@Model.SceneId">Add a Direction</a> |
+    <a asp-action="Edit" asp-route-id="@Model.SceneId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
