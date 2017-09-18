@@ -4,55 +4,15 @@
     ViewData["Title"] = "Index";
 }
 
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <style>
-  #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-  #sortable li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; height: 1.5em; }
-  html>body #sortable li { height: 1.5em; line-height: 1.2em; }
-  .ui-state-highlight { height: 1.5em; line-height: 1.2em; }
-  </style>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    $( "#sortable" ).sortable({
-      placeholder: "ui-state-highlight"
-    });
-    $( "#sortable" ).disableSelection();
-  } );
-  </script>
-
 <h2>Index</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Order)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Body)
-                </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Project)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+
       <ul id="sortable">
-@foreach (var item in Model) { 
-            <liclass="ui-state-default">
+        @foreach (var item in Model) { 
+            <li class="ui-state-default">
                 @Html.DisplayFor(modelItem => item.Title)
             </li>        
 }
