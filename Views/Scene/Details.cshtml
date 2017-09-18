@@ -44,14 +44,16 @@
     </dl>
 </div>
 Lines:
+<ul id="sortable">
 @foreach (var orderproduct in Model.Lines)
 {
-    <a asp-controller="Line" asp-action="Details" asp-route-id="@orderproduct.LineId"><p>@orderproduct.Description</p></a>
+    <li class="ui-state-default"><a asp-controller="Line" asp-action="Details" asp-route-id="@orderproduct.LineId">@orderproduct.Description</a></li>
 }
+</ul>
 Directions:
 @foreach (var orderproduct in Model.Directions)
 {
-    <a asp-controller="Direction" asp-action="Edit" asp-route-id="@orderproduct.DirectionId"><p>@orderproduct.Body</p></a>
+   <li class="ui-state-default"><a asp-controller="Direction" asp-action="Edit" asp-route-id="@orderproduct.DirectionId"><p>@orderproduct.Body</p></a></li>
 }
 
 <div>
