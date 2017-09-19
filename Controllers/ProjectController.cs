@@ -66,6 +66,7 @@ namespace BE_Capstone.Controllers
             {
                 return NotFound();
             }
+            project.Scenes.OrderBy(file => file.Order);
             return View(project);
         }
 
