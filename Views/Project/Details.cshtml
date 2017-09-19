@@ -28,14 +28,17 @@ Characters:
 @foreach (var orderproduct in Model.Characters)
 {
     <a asp-controller="Character" asp-action="Edit" asp-route-id="@orderproduct.CharacterId"><p>@orderproduct.Name</p></a>
-    <p>@orderproduct.Description</p>
+    
 }
 Scenes:
+<ul id="sortable">
 @foreach (var orderproduct in Model.Scenes)
 {
-    <a asp-controller="Scene" asp-action="Details" asp-route-id="@orderproduct.SceneId"><p>@orderproduct.Title</p></a>
+    
+    
+    <li class="ui-state-default"><a asp-controller="Scene" asp-action="Details" asp-route-id="@orderproduct.SceneId">@orderproduct.Order . @orderproduct.Title</a></li>
 }
-
+</ul>
 <div>
     <a asp-controller="Scene" asp-action="Create" asp-route-id="@Model.ProjectId">Add a Scene</a> |
     <a asp-controller="Character" asp-action="Create" asp-route-id="@Model.ProjectId">Add a Character</a> |

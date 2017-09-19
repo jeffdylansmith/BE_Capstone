@@ -85,6 +85,8 @@ namespace BE_Capstone.Controllers
         {
             if (ModelState.IsValid)
             {
+                IEnumerable<Scene> sceneCount =  _context.Scene.Where(s => s.ProjectId == id);
+                scene.Order = 1 + sceneCount.Count();
                 scene.ProjectId = id;
                 _context.Add(scene);
                 await _context.SaveChangesAsync();
