@@ -53,7 +53,7 @@ namespace BE_Capstone.Controllers
         // GET: Project/Details/5
         [Authorize]
         public async Task<IActionResult> Details(int? id)
-        {
+        { 
             if (id == null)
             {
                 return NotFound();
@@ -61,13 +61,52 @@ namespace BE_Capstone.Controllers
             var project = await _context.Project
                 .Include("Scenes")
                 .Include("Characters")
-                .SingleOrDefaultAsync(m => m.ProjectId == id);
+                .SingleOrDefaultAsync(m => m.ProjectId == id);  
             if (project == null)
             {
                 return NotFound();
             }
-            project.Scenes.OrderBy(file => file.Order);
             return View(project);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> updateSceneOrder(int newIndex, int oldIndex, [FromRoute]int id)
+        {
+            Console.WriteLine("Old:" + oldIndex);
+            Console.WriteLine("New:" + newIndex);
+            Project projectScenes =  await _context.Project
+                    .Include("Scenes")
+                    .SingleOrDefaultAsync(m => m.ProjectId == id);
+            if (oldIndex > newIndex){
+                foreach (Scene X in projectScenes.Scenes)
+                {
+                    if(X.Order >= newIndex + 1 && X.Order < oldIndex + 1)
+                    {
+                        X.Order++;
+                    }
+                    else if(X.Order == oldIndex + 1)
+                    {
+                        X.Order = newIndex + 1;
+                    }
+                } 
+            }
+            if (oldIndex < newIndex){
+                foreach (Scene X in projectScenes.Scenes)
+                {
+                    if(X.Order <= newIndex + 1 && X.Order > oldIndex + 1)
+                    {
+                        X.Order--;
+                    }
+                    else if(X.Order == oldIndex + 1)
+                    {
+                        X.Order = newIndex + 1;
+                    }
+                } 
+            }
+            _context.Update(projectScenes);
+            _context.SaveChanges();
+            return RedirectToAction("Details");
+            
         }
 
         // GET: Project/Create
@@ -183,5 +222,9 @@ namespace BE_Capstone.Controllers
         {
             return _context.Project.Any(e => e.ProjectId == id);
         }
+
+        
+      
+    
     }
 }

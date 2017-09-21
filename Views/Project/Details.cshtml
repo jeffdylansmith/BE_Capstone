@@ -5,7 +5,7 @@
 }
 
 <h2>Details</h2>
-
+<input type="hidden" id="help" asp-for="ProjectId">
 <div>
     <h4>Project</h4>
     <hr />
@@ -32,16 +32,14 @@ Characters:
 }
 Scenes:
 <ul id="sortable">
-@foreach (var orderproduct in Model.Scenes)
+@foreach (var orderproduct in Model.Scenes.OrderBy(i => i.Order))
 {
-    
-    
     <li class="ui-state-default"><a asp-controller="Scene" asp-action="Details" asp-route-id="@orderproduct.SceneId">@orderproduct.Order . @orderproduct.Title</a></li>
 }
 </ul>
 <div>
     <a asp-controller="Scene" asp-action="Create" asp-route-id="@Model.ProjectId">Add a Scene</a> |
     <a asp-controller="Character" asp-action="Create" asp-route-id="@Model.ProjectId">Add a Character</a> |
-    <a asp-action="Edit" asp-route-id="@Model.ProjectId">Edit</a> |
+    <a asp-controller="Project" asp-action="Edit" asp-route-id="@Model.ProjectId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

@@ -23,7 +23,7 @@ namespace BE_Capstone.Models
         [Required]
         public string Description { get; set; }
 
-        public ICollection<Scene> Scenes { get; set; }
+        public IEnumerable<Scene> Scenes { get; set; }
 
         public ICollection<Character> Characters { get; set; }
      } 
