@@ -8,8 +8,8 @@ using BE_Capstone.Data;
 namespace BE_Capstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170921035729_Third")]
-    partial class Third
+    [Migration("20170921050124_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -120,8 +120,7 @@ namespace BE_Capstone.Migrations
 
                     b.Property<int>("CharacterId");
 
-                    b.Property<string>("Description")
-                        .IsRequired();
+                    b.Property<string>("Description");
 
                     b.Property<int>("Order");
 

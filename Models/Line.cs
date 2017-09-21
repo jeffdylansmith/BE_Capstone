@@ -13,7 +13,7 @@ namespace BE_Capstone.Models
         [Key]
         public int LineId { get; set; }
 
-        [Required]
+        
         public string Description { get; set; }
         
         public int Order { get; set; }

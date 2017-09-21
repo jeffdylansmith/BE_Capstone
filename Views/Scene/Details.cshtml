@@ -5,7 +5,7 @@
 }
 
 <h2>Details</h2>
-
+<input type="hidden" id="help" asp-for="SceneId">
 <div>
     <h4>Scene</h4>
     <hr />
@@ -44,17 +44,13 @@
     </dl>
 </div>
 Lines:
-<ul id="sortable">
-@foreach (var orderproduct in Model.Lines)
+<ul id="sortable" class="lineSortable">
+@foreach (var orderproduct in Model.Lines.OrderBy(i => i.Order))
 {
-    <li class="ui-state-default"><a asp-controller="Line" asp-action="Details" asp-route-id="@orderproduct.LineId">@orderproduct.Description</a></li>
+    <li class="ui-state-default"><a asp-controller="Line" asp-action="Details" asp-route-id="@orderproduct.LineId">@orderproduct.Order .@orderproduct.Body</a></li>
 }
 </ul>
-Directions:
-@foreach (var orderproduct in Model.Directions)
-{
-   <li class="ui-state-default"><a asp-controller="Direction" asp-action="Edit" asp-route-id="@orderproduct.DirectionId"><p>@orderproduct.Body</p></a></li>
-}
+
 
 <div>
     <a asp-controller="Line" asp-action="Create" asp-route-id="@Model.SceneId">Add a Line</a> |
