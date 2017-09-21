@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BE_Capstone.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -248,7 +248,7 @@ namespace BE_Capstone.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Body = table.Column<string>(nullable: false),
                     CharacterId = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
                     Order = table.Column<int>(nullable: false),
                     ProjectId = table.Column<int>(nullable: false),
                     SceneId = table.Column<int>(nullable: false)

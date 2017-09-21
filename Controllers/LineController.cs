@@ -64,6 +64,8 @@ namespace BE_Capstone.Controllers
         {
             if (ModelState.IsValid)
            {
+               IEnumerable<Line> lineCount =  _context.Line.Where(s => s.SceneId == id);
+                line.Order = 1 + lineCount.Count();
                 var projId = await _context.Scene.SingleOrDefaultAsync(m => m.SceneId == id);
                 line.SceneId = id;
                 line.ProjectId = projId.ProjectId;

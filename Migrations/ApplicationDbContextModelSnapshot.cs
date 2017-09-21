@@ -119,8 +119,7 @@ namespace BE_Capstone.Migrations
 
                     b.Property<int>("CharacterId");
 
-                    b.Property<string>("Description")
-                        .IsRequired();
+                    b.Property<string>("Description");
 
                     b.Property<int>("Order");
 

@@ -149,6 +149,45 @@ namespace BE_Capstone.Controllers
             return View(scene);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> updateLineOrder(int newIndex, int oldIndex, [FromRoute]int id)
+        {
+            Console.WriteLine("Old:" + oldIndex);
+            Console.WriteLine("New:" + newIndex);
+            Scene sceneLines =  await _context.Scene
+                    .Include("Lines")
+                    .SingleOrDefaultAsync(m => m.SceneId == id);
+            if (oldIndex > newIndex){
+                foreach (Line X in sceneLines.Lines)
+                {
+                    if(X.Order >= newIndex + 1 && X.Order < oldIndex + 1)
+                    {
+                        X.Order++;
+                    }
+                    else if(X.Order == oldIndex + 1)
+                    {
+                        X.Order = newIndex + 1;
+                    }
+                } 
+            }
+            if (oldIndex < newIndex){
+                foreach (Line X in sceneLines.Lines)
+                {
+                    if(X.Order <= newIndex + 1 && X.Order > oldIndex + 1)
+                    {
+                        X.Order--;
+                    }
+                    else if(X.Order == oldIndex + 1)
+                    {
+                        X.Order = newIndex + 1;
+                    }
+                } 
+            }
+            _context.Update(sceneLines);
+            _context.SaveChanges();
+            return RedirectToAction("Details");  
+        }
+
         // GET: Scene/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
