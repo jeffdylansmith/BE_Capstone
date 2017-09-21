@@ -34,7 +34,7 @@ Scenes:
 <ul id="sortable">
 @foreach (var orderproduct in Model.Scenes.OrderBy(i => i.Order))
 {
-    <li class="ui-state-default"><a asp-controller="Scene" asp-action="Details" asp-route-id="@orderproduct.SceneId">@orderproduct.Order . @orderproduct.Title</a></li>
+    <li class="ui-state-default"><a asp-controller="Scene" asp-action="Details" asp-route-id="@orderproduct.SceneId"> @orderproduct.Title</a></li>
 }
 </ul>
 <div>

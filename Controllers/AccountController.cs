@@ -41,7 +41,7 @@ namespace BE_Capstone.Controllers
             _logger = loggerFactory.CreateLogger<AccountController>();
         }
 
-        //
+        
         // GET: /Account/Login
         [HttpGet]
         [AllowAnonymous]
@@ -54,7 +54,7 @@ namespace BE_Capstone.Controllers
             return View();
         }
 
-        //
+        
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
@@ -92,7 +92,7 @@ namespace BE_Capstone.Controllers
             return View(model);
         }
 
-        //
+
         // GET: /Account/Register
         [HttpGet]
         [AllowAnonymous]
@@ -102,7 +102,7 @@ namespace BE_Capstone.Controllers
             return View();
         }
 
-        //
+        
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]

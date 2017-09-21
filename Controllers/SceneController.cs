@@ -59,8 +59,12 @@ namespace BE_Capstone.Controllers
             var scene = await _context.Scene
                 .Include(s => s.Project)
                 .Include("Lines")
-                .Include("Directions")
                 .SingleOrDefaultAsync(m => m.SceneId == id);
+            foreach(Line X in scene.Lines)
+            {
+                var Y = _context.Character.SingleOrDefault(c => c.CharacterId == X.CharacterId);
+                X.Character = Y;
+            }
             if (scene == null)
             {
                 return NotFound();
