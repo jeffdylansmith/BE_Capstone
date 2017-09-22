@@ -4,12 +4,8 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit</h2>
-
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>Scene</h4>
-        <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="SceneId" />
         <div class="form-group">
@@ -41,7 +37,7 @@
 </form>
 
 <div>
-    <a asp-action="Details" asp-route-id=@ViewData["SceneId"]>Back</a>
+    <a asp-action="Details" asp-route-id=@ViewData["SceneId"]>Back to Scene</a> |
     <a asp-action="Delete" asp-route-id=@ViewData["SceneId"]>Delete</a>
 </div>
 

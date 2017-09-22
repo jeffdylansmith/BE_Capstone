@@ -122,7 +122,7 @@ namespace BE_Capstone.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("ProjectId,Title,Description")] Project project)
+        public async Task<IActionResult> Create(Project project)
         {
             ModelState.Remove("User");
             if (ModelState.IsValid)
@@ -131,7 +131,7 @@ namespace BE_Capstone.Controllers
                 project.User = user;
                 _context.Add(project);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("MyProjects");
             }
             return View(project);
         }
@@ -149,6 +149,7 @@ namespace BE_Capstone.Controllers
             {
                 return NotFound();
             }
+            ViewData["ProjectID"] = id;
             return View(project);
         }
 

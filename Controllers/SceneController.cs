@@ -76,7 +76,7 @@ namespace BE_Capstone.Controllers
         // GET: Scene/Create
         public IActionResult Create(int? id)
         {
-            //ViewData["ProjectId"] = new SelectList(_context.Project, "ProjectId", "Description");
+            ViewData["ProjectId"] = id;
             return View();
         }
 
@@ -149,7 +149,7 @@ namespace BE_Capstone.Controllers
                     }
                 }
                 ViewData["ProjectId"] = new SelectList(_context.Project, "ProjectId", "Description", scene.ProjectId);
-                return RedirectToAction("Details","Project", new {id = id});
+                return RedirectToAction("Details","Scene", new {id = id});
             }
             
             return View(scene);
@@ -219,9 +219,29 @@ namespace BE_Capstone.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var scene = await _context.Scene.SingleOrDefaultAsync(m => m.SceneId == id);
+            int scrapOrder = scene.Order;
+            int sceneId = scene.ProjectId;
             _context.Scene.Remove(scene);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            await updateRemainingScenes(sceneId, scrapOrder);
+            return RedirectToAction("Details","Project", new {id = sceneId});
+        }
+
+        public async Task<IActionResult> updateRemainingScenes(int id, int xPoint)
+        {
+            var remainingScenes = await _context.Project
+                    .Include("Scenes")
+                    .SingleOrDefaultAsync(s => s.ProjectId == id);
+            foreach(Scene X in remainingScenes.Scenes)
+            {
+                if(X.Order > xPoint)
+                {
+                    X.Order--;
+                }
+            }  
+            _context.Update(remainingScenes);
+            await _context.SaveChangesAsync();
+            return View();
         }
 
         private bool SceneExists(int id)

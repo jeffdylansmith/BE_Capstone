@@ -50,7 +50,7 @@ namespace BE_Capstone.Controllers
         public async Task<IActionResult> Create(int? id)
         {
             var projId = await _context.Scene.SingleOrDefaultAsync(m => m.SceneId == id);
-            ViewData["CharacterId"] = new SelectList(_context.Character.Where(c => c.ProjectId == projId.ProjectId), "CharacterId", "Description");
+            ViewData["CharacterId"] = new SelectList(_context.Character.Where(c => c.ProjectId == projId.ProjectId), "CharacterId", "Name");
             ViewData["SceneId"] = id;
             return View();
         }
@@ -150,7 +150,7 @@ namespace BE_Capstone.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["SceneId"] = line.SceneId;
             return View(line);
         }
 
@@ -160,9 +160,29 @@ namespace BE_Capstone.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var line = await _context.Line.SingleOrDefaultAsync(m => m.LineId == id);
+            int scrapOrder = line.Order;
+            int sceneId = line.SceneId;
             _context.Line.Remove(line);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            await updateRemainingLines(sceneId, scrapOrder);     
+            return RedirectToAction("Details","Scene", new {id = line.SceneId});
+        }
+
+        public async Task<IActionResult> updateRemainingLines(int id, int xPoint)
+        {
+            var remainingLines = await _context.Scene
+                    .Include("Lines")
+                    .SingleOrDefaultAsync(s => s.SceneId == id);
+            foreach(Line X in remainingLines.Lines)
+            {
+                if(X.Order > xPoint)
+                {
+                    X.Order--;
+                }
+            }  
+            _context.Update(remainingLines);
+            await _context.SaveChangesAsync();
+            return View();
         }
 
         private bool LineExists(int id)
