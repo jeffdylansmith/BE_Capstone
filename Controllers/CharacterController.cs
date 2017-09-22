@@ -46,8 +46,9 @@ namespace BE_Capstone.Controllers
         }
 
         // GET: Character/Create
-        public IActionResult Create()
+        public IActionResult Create([FromRoute]int? id)
         {
+            ViewData["ProjId"] = id;
             ViewData["ProjectId"] = new SelectList(_context.Project, "ProjectId", "Description");
             return View();
         }
@@ -57,7 +58,7 @@ namespace BE_Capstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CharacterId,Name,Description,ProjectId")] Character character, int id)
+        public async Task<IActionResult> Create(Character character, int id)
         {
             if (ModelState.IsValid)
             {
@@ -150,7 +151,7 @@ namespace BE_Capstone.Controllers
             var character = await _context.Character.SingleOrDefaultAsync(m => m.CharacterId == id);
             _context.Character.Remove(character);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details","Project", new {id = character.ProjectId});
         }
 
         private bool CharacterExists(int id)
