@@ -83,6 +83,8 @@ namespace BE_Capstone.Controllers
             {
                 return NotFound();
             }
+            ViewData["Id"] = character.ProjectId;
+            ViewData["PROJId"] = character.CharacterId;
             return View(character);
         }
 
@@ -136,7 +138,7 @@ namespace BE_Capstone.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["ProjId"] = character.ProjectId;
             return View(character);
         }
 

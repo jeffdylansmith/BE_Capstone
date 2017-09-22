@@ -36,10 +36,9 @@
     </dl>
 </div>
 <div>
+        <a asp-controller="Project" asp-action="Details" asp-route-id="@Model.ProjectId">Back to Project</a> |
     <a asp-controller="Line" asp-action="Create" asp-route-id="@Model.SceneId">Add a Line</a> |
-    <a asp-controller="Direction" asp-action="Create" asp-route-id="@Model.SceneId">Add a Direction</a> |
-    <a asp-action="Edit" asp-route-id="@Model.SceneId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.SceneId">Edit Scene Info</a>
 </div>
 <div class="card">
 <ul id="sortable" class="lineSortable">

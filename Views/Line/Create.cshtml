@@ -4,12 +4,11 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+
 
 <form asp-action="Create">
     <div class="form-horizontal">
-        <h4>Line</h4>
-        <hr />
+        
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Description" class="col-md-2 control-label"></label>
@@ -42,6 +41,6 @@
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Scene" asp-action="Details" asp-route-id=@ViewData["SceneId"]>Back to Scene</a>
 </div>
 

@@ -51,7 +51,7 @@ namespace BE_Capstone.Controllers
         {
             var projId = await _context.Scene.SingleOrDefaultAsync(m => m.SceneId == id);
             ViewData["CharacterId"] = new SelectList(_context.Character.Where(c => c.ProjectId == projId.ProjectId), "CharacterId", "Description");
-            // ViewData["SceneId"] = new SelectList(_context.Scene, "SceneId", "Description");
+            ViewData["SceneId"] = id;
             return View();
         }
 
@@ -92,6 +92,8 @@ namespace BE_Capstone.Controllers
             {
                 return NotFound();
             }
+            ViewData["SceneId"] = line.SceneId;
+            ViewData["LineId"] = line.LineId;
             ViewData["CharacterId"] = new SelectList(_context.Character, "CharacterId", "Description", line.CharacterId);
             return View(line);
         }
