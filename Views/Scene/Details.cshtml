@@ -1,60 +1,57 @@
 @model BE_Capstone.Models.Scene
 
+
 @{
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
 <input type="hidden" id="help" asp-for="SceneId">
 <div>
-    <h4>Scene</h4>
-    <hr />
     <input type="hidden" asp-for="SceneId" />
     <dl class="dl-horizontal">
+         <dt>
+            @Html.DisplayNameFor(model => model.Project) Title
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Project.Title)
+        </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Title)
+            Scene @Html.DisplayNameFor(model => model.Title)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Title)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
+         <dt>
             @Html.DisplayNameFor(model => model.Order)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Order)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Body)
+            @Html.DisplayNameFor(model => model.Description)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Body)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Project)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Project.Description)
-        </dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>    
     </dl>
 </div>
-Lines:
+<div>
+        <a asp-controller="Project" asp-action="Details" asp-route-id="@Model.ProjectId">Back to Project</a> |
+    <a asp-controller="Line" asp-action="Create" asp-route-id="@Model.SceneId">Add a Line</a> |
+    <a asp-action="Edit" asp-route-id="@Model.SceneId">Edit Scene Info</a>
+</div>
+<div class="card">
 <ul id="sortable" class="lineSortable">
 @foreach (var orderproduct in Model.Lines.OrderBy(i => i.Order))
 {
-    <li class="ui-state-default"><a asp-controller="Line" asp-action="Details" asp-route-id="@orderproduct.LineId">@orderproduct.Order .@orderproduct.Body</a></li>
+    <div class="card-block" class="ui-state-default">
+        <h4 class="card-title">@orderproduct.Character.Name</h4>
+        <h6 class="card-subtitle mb-2 text-muted">@orderproduct.Description</h6>
+        <p class="card-text"><a asp-controller="Line" asp-action="Edit" asp-route-id="@orderproduct.LineId">@orderproduct.Body</a></p>
+    </div>
 }
 </ul>
-
-
-<div>
-    <a asp-controller="Line" asp-action="Create" asp-route-id="@Model.SceneId">Add a Line</a> |
-    <a asp-controller="Direction" asp-action="Create" asp-route-id="@Model.SceneId">Add a Direction</a> |
-    <a asp-action="Edit" asp-route-id="@Model.SceneId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
 </div>
+
+
+

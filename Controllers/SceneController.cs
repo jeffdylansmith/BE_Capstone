@@ -59,8 +59,12 @@ namespace BE_Capstone.Controllers
             var scene = await _context.Scene
                 .Include(s => s.Project)
                 .Include("Lines")
-                .Include("Directions")
                 .SingleOrDefaultAsync(m => m.SceneId == id);
+            foreach(Line X in scene.Lines)
+            {
+                var Y = _context.Character.SingleOrDefault(c => c.CharacterId == X.CharacterId);
+                X.Character = Y;
+            }
             if (scene == null)
             {
                 return NotFound();
@@ -81,7 +85,7 @@ namespace BE_Capstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SceneId,Title,Description,Order,Body,ProjectId")] Scene scene, int id)
+        public async Task<IActionResult> Create(Scene scene, int id)
         {
             if (ModelState.IsValid)
             {
@@ -109,6 +113,7 @@ namespace BE_Capstone.Controllers
             {
                 return NotFound();
             }
+            ViewData["SceneId"] = scene.SceneId;
             ViewData["ProjectId"] = new SelectList(_context.Project, "ProjectId", "Description", scene.ProjectId);
             return View(scene);
         }
@@ -118,7 +123,7 @@ namespace BE_Capstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SceneId,Title,Description,Order,Body,ProjectId")] Scene scene)
+        public async Task<IActionResult> Edit(int id, Scene scene)
         {
             if (id != scene.SceneId)
             {
@@ -143,9 +148,10 @@ namespace BE_Capstone.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                ViewData["ProjectId"] = new SelectList(_context.Project, "ProjectId", "Description", scene.ProjectId);
+                return RedirectToAction("Details","Project", new {id = id});
             }
-            ViewData["ProjectId"] = new SelectList(_context.Project, "ProjectId", "Description", scene.ProjectId);
+            
             return View(scene);
         }
 

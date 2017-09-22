@@ -1,4 +1,10 @@
-﻿body {
+﻿*{
+    font-family: "Courier";
+}
+
+
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -50,8 +56,12 @@ textarea {
 }
 
 
-#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-#sortable li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; height: 1.5em; }
-body #sortable li { height: 1.5em; line-height: 1.2em; }
+#sortable { list-style-type: none; margin: auto; padding: 10%; width: 60%; align-content: center;padding-top:0; }
+#sortable li { margin: 5px 5px 5px 5px; padding: 5px; font-size: 1.2em; height: 3em; align-content: center; }
+body #sortable li { height: 5em; line-height: .5em; align-content: center }
 .ui-state-highlight { height: 1.5em; line-height: 1.2em; }
-
+.ui-state-default{align-content: center;}
+.card-block{text-align: center;}
+.card{padding-top: 1.5em;}
+.card-subtitle{padding-left:2.5em; text-decoration: none; }
+a{text-decoration: none; color: black;}

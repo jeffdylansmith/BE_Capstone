@@ -51,7 +51,7 @@ namespace BE_Capstone.Controllers
         {
             var projId = await _context.Scene.SingleOrDefaultAsync(m => m.SceneId == id);
             ViewData["CharacterId"] = new SelectList(_context.Character.Where(c => c.ProjectId == projId.ProjectId), "CharacterId", "Description");
-            // ViewData["SceneId"] = new SelectList(_context.Scene, "SceneId", "Description");
+            ViewData["SceneId"] = id;
             return View();
         }
 
@@ -92,8 +92,9 @@ namespace BE_Capstone.Controllers
             {
                 return NotFound();
             }
+            ViewData["SceneId"] = line.SceneId;
+            ViewData["LineId"] = line.LineId;
             ViewData["CharacterId"] = new SelectList(_context.Character, "CharacterId", "Description", line.CharacterId);
-            ViewData["SceneId"] = new SelectList(_context.Scene, "SceneId", "Description", line.SceneId);
             return View(line);
         }
 
@@ -102,7 +103,7 @@ namespace BE_Capstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("LineId,Description,Order,Body,CharacterId,SceneId")] Line line)
+        public async Task<IActionResult> Edit(int id, Line line)
         {
             if (id != line.LineId)
             {
@@ -127,10 +128,9 @@ namespace BE_Capstone.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Details","Scene", new {id = id});
+                return RedirectToAction("Details","Scene", new {id = line.SceneId});
             }
             ViewData["CharacterId"] = new SelectList(_context.Character, "CharacterId", "Description", line.CharacterId);
-            ViewData["SceneId"] = new SelectList(_context.Scene, "SceneId", "Description", line.SceneId);
             return View(line);
         }
 
