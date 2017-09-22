@@ -189,8 +189,7 @@ namespace BE_Capstone.Controllers
         }
 
         // GET: Project/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+     
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -216,7 +215,7 @@ namespace BE_Capstone.Controllers
             var project = await _context.Project.SingleOrDefaultAsync(m => m.ProjectId == id);
             _context.Project.Remove(project);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("MyProjects");
         }
 
         private bool ProjectExists(int id)
