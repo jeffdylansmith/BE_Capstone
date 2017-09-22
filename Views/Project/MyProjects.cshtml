@@ -20,13 +20,14 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <a asp-action="Details" asp-route-id="@item.ProjectId"><td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.ProjectId">
                 @Html.DisplayFor(modelItem => item.Title)
-            </td></a>
+                </a>
+            </td>
             
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ProjectId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProjectId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.ProjectId">Delete</a>
             </td>
         </tr>
